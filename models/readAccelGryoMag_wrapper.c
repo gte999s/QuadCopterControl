@@ -271,7 +271,7 @@ if(xD[0] == 1)
         dh= sU.byte[0];
         dl= sU.byte[1];
         count =((dh<<8)|dl);
-        DataSamples=floor(count/12);
+        DataSamples=(int)(count/12);
     }       
         
         index=0;
@@ -372,16 +372,16 @@ FIFOCount[0]=DataSamples;
   * Updates function
   *
   */
-void readAccelGryoMag_Update_wrapper(const real32_T *AccelX,
-			const real32_T *AccelY,
-			const real32_T *AccelZ,
-			const real32_T *GyroX,
-			const real32_T *GyroY,
-			const real32_T *GyroZ,
-			const real32_T *MagX,
-			const real32_T *MagY,
-			const real32_T *MagZ,
-			const real32_T *FIFOCount,
+void readAccelGryoMag_Update_wrapper(real32_T *AccelX,
+			real32_T *AccelY,
+			real32_T *AccelZ,
+			real32_T *GyroX,
+			real32_T *GyroY,
+			real32_T *GyroZ,
+			real32_T *MagX,
+			real32_T *MagY,
+			real32_T *MagZ,
+			real32_T *FIFOCount,
 			real_T *xD)
 {
   /* %%%-SFUNWIZ_wrapper_Update_Changes_BEGIN --- EDIT HERE TO _END */

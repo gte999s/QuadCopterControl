@@ -25,7 +25,7 @@
   *  -------------------------------------------------------------------------
   * | See matlabroot/simulink/src/sfuntmpl_doc.c for a more detailed template |
   *  ------------------------------------------------------------------------- 
-* Created: Fri Dec 23 16:01:27 2016
+* Created: Thu Dec 29 14:13:10 2016
 */
 #define S_FUNCTION_LEVEL 2
 #define S_FUNCTION_NAME readAccelGryoMag
@@ -226,16 +226,16 @@ extern void readAccelGryoMag_Outputs_wrapper(real32_T *AccelX,
 			real32_T *MagZ,
 			real32_T *FIFOCount,
 			const real_T *xD);
-extern void readAccelGryoMag_Update_wrapper(const real32_T *AccelX,
-			const real32_T *AccelY,
-			const real32_T *AccelZ,
-			const real32_T *GyroX,
-			const real32_T *GyroY,
-			const real32_T *GyroZ,
-			const real32_T *MagX,
-			const real32_T *MagY,
-			const real32_T *MagZ,
-			const real32_T *FIFOCount,
+extern void readAccelGryoMag_Update_wrapper(real32_T *AccelX,
+			real32_T *AccelY,
+			real32_T *AccelZ,
+			real32_T *GyroX,
+			real32_T *GyroY,
+			real32_T *GyroZ,
+			real32_T *MagX,
+			real32_T *MagY,
+			real32_T *MagZ,
+			real32_T *FIFOCount,
 			real_T *xD);
 
 /*====================*
@@ -256,6 +256,7 @@ static void mdlInitializeSizes(SimStruct *S)
 
     ssSetNumContStates(S, NUM_CONT_STATES);
     ssSetNumDiscStates(S, NUM_DISC_STATES);
+
 
     if (!ssSetNumInputPorts(S, NUM_INPUTS)) return;
 
@@ -308,7 +309,7 @@ static void mdlInitializeSizes(SimStruct *S)
     ssSetNumModes(S, 0);
     ssSetNumNonsampledZCs(S, 0);
 
-    ssSetSimulinkVersionGeneratedIn(S, "8.6");
+    ssSetSimulinkVersionGeneratedIn(S, "8.8");
 
     /* Take care when specifying exception free code - see sfuntmpl_doc.c */
     ssSetOptions(S, (SS_OPTION_EXCEPTION_FREE_CODE |

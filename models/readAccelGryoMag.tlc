@@ -1,5 +1,5 @@
 %% File : readAccelGryoMag.tlc
-%% Created: Fri Dec 23 16:01:27 2016
+%% Created: Thu Dec 29 14:13:10 2016
 %%
 %% Description: 
 %%   Simulink Coder wrapper functions interface generated for 
@@ -35,16 +35,16 @@
 			real32_T *MagZ,
 			real32_T *FIFOCount,
 			const real_T *xD);
-  extern void readAccelGryoMag_Update_wrapper(const real32_T *AccelX,
-			const real32_T *AccelY,
-			const real32_T *AccelZ,
-			const real32_T *GyroX,
-			const real32_T *GyroY,
-			const real32_T *GyroZ,
-			const real32_T *MagX,
-			const real32_T *MagY,
-			const real32_T *MagZ,
-			const real32_T *FIFOCount,
+  extern void readAccelGryoMag_Update_wrapper(real32_T *AccelX,
+			real32_T *AccelY,
+			real32_T *AccelZ,
+			real32_T *GyroX,
+			real32_T *GyroY,
+			real32_T *GyroZ,
+			real32_T *MagX,
+			real32_T *MagY,
+			real32_T *MagZ,
+			real32_T *FIFOCount,
 			real_T *xD);
   %closefile externs
   %<LibCacheExtern(externs)>
