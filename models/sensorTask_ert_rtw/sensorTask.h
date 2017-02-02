@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'sensorTask'.
  *
- * Model version                  : 1.133
+ * Model version                  : 1.138
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Dec 31 21:41:46 2016
+ * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,8 +19,8 @@
 
 #ifndef RTW_HEADER_sensorTask_h_
 #define RTW_HEADER_sensorTask_h_
-#include <float.h>
 #include <string.h>
+#include <float.h>
 #include <stddef.h>
 #ifndef sensorTask_COMMON_INCLUDES_
 # define sensorTask_COMMON_INCLUDES_
@@ -76,7 +76,7 @@
 
 /* Block signals (auto storage) */
 typedef struct {
-  real32_T TmpSignalConversionAtUDPSendInp[31];
+  real32_T TmpSignalConversionAtUDPSendInp[32];
   real32_T readAccelGyroMagSfun_o1[4]; /* '<S6>/readAccelGyroMagSfun' */
   real32_T readAccelGyroMagSfun_o2[4]; /* '<S6>/readAccelGyroMagSfun' */
   real32_T readAccelGyroMagSfun_o3[4]; /* '<S6>/readAccelGyroMagSfun' */
@@ -93,7 +93,24 @@ typedef struct {
 typedef struct {
   real_T readAccelGyroMagSfun_DSTATE;  /* '<S6>/readAccelGyroMagSfun' */
   real_T UDPSend_NetworkLib[137];      /* '<Root>/UDP Send' */
+  uint32_T Output_DSTATE;              /* '<S7>/Output' */
 } DW_sensorTask_T;
+
+/* Parameters (auto storage) */
+struct P_sensorTask_T_ {
+  uint32_T WrapToZero_Threshold;       /* Mask Parameter: WrapToZero_Threshold
+                                        * Referenced by: '<S10>/FixPt Switch'
+                                        */
+  uint32_T Constant_Value;             /* Computed Parameter: Constant_Value
+                                        * Referenced by: '<S10>/Constant'
+                                        */
+  uint32_T FixPtConstant_Value;        /* Computed Parameter: FixPtConstant_Value
+                                        * Referenced by: '<S9>/FixPt Constant'
+                                        */
+  uint32_T Output_InitialCondition;    /* Computed Parameter: Output_InitialCondition
+                                        * Referenced by: '<S7>/Output'
+                                        */
+};
 
 /* Real-time Model Data Structure */
 struct tag_RTM_sensorTask_T {
@@ -133,6 +150,9 @@ struct tag_RTM_sensorTask_T {
   } Timing;
 };
 
+/* Block parameters (auto storage) */
+extern P_sensorTask_T sensorTask_P;
+
 /* Block signals (auto storage) */
 extern B_sensorTask_T sensorTask_B;
 
@@ -146,6 +166,14 @@ extern void sensorTask_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_sensorTask_T *const sensorTask_M;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S7>/FixPt Data Type Propagation' : Unused code path elimination
+ * Block '<S9>/FixPt Data Type Duplicate' : Unused code path elimination
+ * Block '<S10>/FixPt Data Type Duplicate1' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -168,6 +196,10 @@ extern RT_MODEL_sensorTask_T *const sensorTask_M;
  * '<S4>'   : 'sensorTask/createMatrix1'
  * '<S5>'   : 'sensorTask/createMatrix2'
  * '<S6>'   : 'sensorTask/readSensors'
+ * '<S7>'   : 'sensorTask/readSensors/Counter Free-Running'
+ * '<S8>'   : 'sensorTask/readSensors/MATLAB Function'
+ * '<S9>'   : 'sensorTask/readSensors/Counter Free-Running/Increment Real World'
+ * '<S10>'  : 'sensorTask/readSensors/Counter Free-Running/Wrap To Zero'
  */
 #endif                                 /* RTW_HEADER_sensorTask_h_ */
 

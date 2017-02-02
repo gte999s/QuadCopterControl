@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'sensorTask'.
  *
- * Model version                  : 1.133
+ * Model version                  : 1.138
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Dec 31 21:41:46 2016
+ * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex

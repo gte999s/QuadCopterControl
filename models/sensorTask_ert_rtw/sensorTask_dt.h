@@ -7,9 +7,9 @@
  *
  * Code generation for model "sensorTask".
  *
- * Model version              : 1.133
+ * Model version              : 1.138
  * Simulink Coder version : 8.11 (R2016b) 25-Aug-2016
- * C source code generated on : Sat Dec 31 21:41:46 2016
+ * C source code generated on : Sun Jan 22 20:23:09 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -57,16 +57,29 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&sensorTask_B.TmpSignalConversionAtUDPSendInp[0]), 1, 0, 62 }
+  { (char_T *)(&sensorTask_B.TmpSignalConversionAtUDPSendInp[0]), 1, 0, 63 }
   ,
 
-  { (char_T *)(&sensorTask_DW.readAccelGyroMagSfun_DSTATE), 0, 0, 138 }
+  { (char_T *)(&sensorTask_DW.readAccelGyroMagSfun_DSTATE), 0, 0, 138 },
+
+  { (char_T *)(&sensorTask_DW.Output_DSTATE), 7, 0, 1 }
 };
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  2U,
+  3U,
   rtBTransitions
+};
+
+/* data type transitions for Parameters structure */
+static DataTypeTransition rtPTransitions[] = {
+  { (char_T *)(&sensorTask_P.WrapToZero_Threshold), 7, 0, 4 }
+};
+
+/* data type transition table for Parameters structure */
+static DataTypeTransitionTable rtPTransTable = {
+  1U,
+  rtPTransitions
 };
 
 /* [EOF] sensorTask_dt.h */

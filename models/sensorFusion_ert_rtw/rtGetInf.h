@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: multiword_types.h
+ * File: rtGetInf.h
  *
- * Code generated for Simulink model 'sensorTask'.
+ * Code generated for Simulink model 'sensorFusion'.
  *
- * Model version                  : 1.138
+ * Model version                  : 1.37
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
+ * C/C++ source code generated on : Sun Jan 22 20:44:38 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -17,17 +17,18 @@
  * Validation result: Not run
  */
 
-#ifndef MULTIWORD_TYPES_H
-#define MULTIWORD_TYPES_H
+#ifndef RTW_HEADER_rtGetInf_h_
+#define RTW_HEADER_rtGetInf_h_
+#include <stddef.h>
 #include "rtwtypes.h"
+#include "rt_nonfinite.h"
 
-/*
- * Definitions supporting external data access
- */
-typedef int32_T chunk_T;
-typedef uint32_T uchunk_T;
+extern real_T rtGetInf(void);
+extern real32_T rtGetInfF(void);
+extern real_T rtGetMinusInf(void);
+extern real32_T rtGetMinusInfF(void);
 
-#endif                                 /* MULTIWORD_TYPES_H */
+#endif                                 /* RTW_HEADER_rtGetInf_h_ */
 
 /*
  * File trailer for generated code.

@@ -1,13 +1,13 @@
 ###########################################################################
-## Makefile generated for Simulink model 'sensorTask'. 
+## Makefile generated for Simulink model 'sensorFusion'. 
 ## 
-## Makefile     : sensorTask.mk
-## Generated on : Sun Jan 22 20:23:13 2017
+## Makefile     : sensorFusion.mk
+## Generated on : Sun Jan 22 20:44:42 2017
 ## MATLAB Coder version: 3.2 (R2016b)
 ## 
 ## Build Info:
 ## 
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/sensorTask.elf
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/sensorFusion.elf
 ## Product type : executable
 ## Build type   : Top-Level Standalone Executable
 ## 
@@ -22,8 +22,8 @@
 # MAKEFILE                Name of this makefile
 # COMPUTER                Computer type. See the MATLAB "computer" command.
 
-PRODUCT_NAME              = sensorTask
-MAKEFILE                  = sensorTask.mk
+PRODUCT_NAME              = sensorFusion
+MAKEFILE                  = sensorFusion.mk
 COMPUTER                  = GLNX
 MATLAB_ROOT               = .
 MATLAB_BIN                = .
@@ -35,7 +35,7 @@ SOLVER                    =
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = None
-MODELREF_LINK_RSPFILE_NAME = sensorTask_ref.rsp
+MODELREF_LINK_RSPFILE_NAME = sensorFusion_ref.rsp
 RELATIVE_PATH_TO_ANCHOR   = ..
 
 ###########################################################################
@@ -177,7 +177,7 @@ MAKE_FLAGS = -f $(MAKEFILE)
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/sensorTask.elf
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/sensorFusion.elf
 PRODUCT_TYPE = "executable"
 BUILD_TYPE = "Top-Level Standalone Executable"
 
@@ -193,12 +193,12 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ## DEFINES
 ###########################################################################
 
-DEFINES_ = -DMODEL=sensorTask -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DON_TARGET_WAIT_FOR_START=1 -DONESTEPFCN=1 -DEXT_MODE=1 -DTERMFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTID01EQ=0 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DRT -DSTACK_SIZE=64
+DEFINES_ = -DMODEL=sensorFusion -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DON_TARGET_WAIT_FOR_START=1 -DONESTEPFCN=1 -DEXT_MODE=1 -DTERMFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTID01EQ=0 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DRT -DSTACK_SIZE=64
 DEFINES_BUILD_ARGS = -DONESTEPFCN=1 -DEXT_MODE=1 -DTERMFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0
 DEFINES_IMPLIED = -DTID01EQ=0
 DEFINES_OPTS = -DON_TARGET_WAIT_FOR_START=1
 DEFINES_SKIPFORSIL = -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DRT -DSTACK_SIZE=64
-DEFINES_STANDARD = -DMODEL=sensorTask -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO
+DEFINES_STANDARD = -DMODEL=sensorFusion -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO
 
 DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_OPTS) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD)
 
@@ -206,7 +206,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_OPTS) $
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = HostLib_Network.c HostLib_rtw.c sensorTask.c sensorTask_data.c ext_svr.c updown.c ext_work.c rtiostream_utils.c readAccelGryoMag_wrapper.c linuxinitialize.c rtiostream_interface.c rtiostream_tcpip.c linuxUDP.c
+SRCS = HostLib_Network.c HostLib_rtw.c rtGetInf.c rtGetNaN.c rt_nonfinite.c sensorFusion.c sensorFusion_data.c ext_svr.c updown.c ext_work.c rtiostream_utils.c linuxinitialize.c rtiostream_interface.c rtiostream_tcpip.c linuxUDP.c
 
 MAIN_SRC = ert_main.c
 
@@ -216,7 +216,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = HostLib_Network.c.o HostLib_rtw.c.o sensorTask.c.o sensorTask_data.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o readAccelGryoMag_wrapper.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o linuxUDP.c.o
+OBJS = HostLib_Network.c.o HostLib_rtw.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o sensorFusion.c.o sensorFusion_data.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o linuxUDP.c.o
 
 MAIN_OBJ = ert_main.c.o
 

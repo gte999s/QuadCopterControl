@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'sensorTask'.
  *
- * Model version                  : 1.133
+ * Model version                  : 1.138
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Dec 31 21:41:46 2016
+ * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -35,6 +35,8 @@ RT_MODEL_sensorTask_T *const sensorTask_M = &sensorTask_M_;
 void sensorTask_step(void)
 {
   char_T *sErr;
+  real32_T y;
+  uint32_T rtb_FixPtSum1;
 
   /* Outputs for Atomic SubSystem: '<Root>/readSensors' */
 
@@ -51,6 +53,19 @@ void sensorTask_step(void)
     &sensorTask_B.readAccelGyroMagSfun_o10,
     &sensorTask_DW.readAccelGyroMagSfun_DSTATE);
 
+  /* Sum: '<S9>/FixPt Sum1' incorporates:
+   *  Constant: '<S9>/FixPt Constant'
+   *  UnitDelay: '<S7>/Output'
+   */
+  rtb_FixPtSum1 = sensorTask_DW.Output_DSTATE + sensorTask_P.FixPtConstant_Value;
+
+  /* MATLAB Function: '<S6>/MATLAB Function' incorporates:
+   *  UnitDelay: '<S7>/Output'
+   */
+  /* MATLAB Function 'readSensors/MATLAB Function': '<S8>:1' */
+  /* '<S8>:1:3' y = typecast(u,'single'); */
+  memcpy(&y, &sensorTask_DW.Output_DSTATE, (size_t)1 * sizeof(real32_T));
+
   /* S-Function "readAccelGryoMag_wrapper" Block: <S6>/readAccelGyroMagSfun */
   readAccelGryoMag_Update_wrapper( &sensorTask_B.readAccelGyroMagSfun_o1[0],
     &sensorTask_B.readAccelGyroMagSfun_o2[0],
@@ -64,9 +79,23 @@ void sensorTask_step(void)
     &sensorTask_B.readAccelGyroMagSfun_o10,
     &sensorTask_DW.readAccelGyroMagSfun_DSTATE);
 
+  /* Switch: '<S10>/FixPt Switch' */
+  if (rtb_FixPtSum1 > sensorTask_P.WrapToZero_Threshold) {
+    /* Update for UnitDelay: '<S7>/Output' incorporates:
+     *  Constant: '<S10>/Constant'
+     */
+    sensorTask_DW.Output_DSTATE = sensorTask_P.Constant_Value;
+  } else {
+    /* Update for UnitDelay: '<S7>/Output' */
+    sensorTask_DW.Output_DSTATE = rtb_FixPtSum1;
+  }
+
+  /* End of Switch: '<S10>/FixPt Switch' */
   /* End of Outputs for SubSystem: '<Root>/readSensors' */
 
-  /* SignalConversion: '<Root>/TmpSignal ConversionAtUDP SendInport1' */
+  /* SignalConversion: '<Root>/TmpSignal ConversionAtUDP SendInport1' incorporates:
+   *  MATLAB Function: '<S6>/MATLAB Function'
+   */
   sensorTask_B.TmpSignalConversionAtUDPSendInp[0] =
     sensorTask_B.readAccelGyroMagSfun_o1[0];
   sensorTask_B.TmpSignalConversionAtUDPSendInp[1] =
@@ -130,10 +159,15 @@ void sensorTask_step(void)
   sensorTask_B.TmpSignalConversionAtUDPSendInp[30] =
     sensorTask_B.readAccelGyroMagSfun_o10;
 
+  /* Outputs for Atomic SubSystem: '<Root>/readSensors' */
+  sensorTask_B.TmpSignalConversionAtUDPSendInp[31] = y;
+
+  /* End of Outputs for SubSystem: '<Root>/readSensors' */
+
   /* Update for S-Function (sdspToNetwork): '<Root>/UDP Send' */
   sErr = GetErrorBuffer(&sensorTask_DW.UDPSend_NetworkLib[0U]);
   LibUpdate_Network(&sensorTask_DW.UDPSend_NetworkLib[0U],
-                    &sensorTask_B.TmpSignalConversionAtUDPSendInp[0U], 31);
+                    &sensorTask_B.TmpSignalConversionAtUDPSendInp[0U], 32);
   if (*sErr != 0) {
     rtmSetErrorStatus(sensorTask_M, sErr);
     rtmSetStopRequested(sensorTask_M, 1);
@@ -183,19 +217,21 @@ void sensorTask_initialize(void)
   sensorTask_M->Timing.stepSize0 = 0.001;
 
   /* External mode info */
-  sensorTask_M->Sizes.checksums[0] = (3935354751U);
-  sensorTask_M->Sizes.checksums[1] = (1656119003U);
-  sensorTask_M->Sizes.checksums[2] = (818636135U);
-  sensorTask_M->Sizes.checksums[3] = (2569935220U);
+  sensorTask_M->Sizes.checksums[0] = (2104941394U);
+  sensorTask_M->Sizes.checksums[1] = (2543980290U);
+  sensorTask_M->Sizes.checksums[2] = (3143385757U);
+  sensorTask_M->Sizes.checksums[3] = (3014307242U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[2];
+    static const sysRanDType *systemRan[4];
     sensorTask_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
     systemRan[1] = &rtAlwaysEnabled;
+    systemRan[2] = &rtAlwaysEnabled;
+    systemRan[3] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(sensorTask_M->extModeInfo,
       &sensorTask_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(sensorTask_M->extModeInfo, sensorTask_M->Sizes.checksums);
@@ -222,6 +258,9 @@ void sensorTask_initialize(void)
 
     /* Block I/O transition table */
     dtInfo.BTransTable = &rtBTransTable;
+
+    /* Parameters transition table */
+    dtInfo.PTransTable = &rtPTransTable;
   }
 
   {
@@ -232,8 +271,7 @@ void sensorTask_initialize(void)
     CreateUDPInterface(&sensorTask_DW.UDPSend_NetworkLib[0U]);
     if (*sErr == 0) {
       LibCreate_Network(&sensorTask_DW.UDPSend_NetworkLib[0U], 1,
-                        "255.255.255.255", -1, "255.255.255.255", 25000, 8192, 4,
-                        0);
+                        "255.255.255.255", -1, "127.0.0.1", 25000, 8192, 4, 0);
     }
 
     if (*sErr == 0) {
@@ -263,6 +301,9 @@ void sensorTask_initialize(void)
         }
       }
     }
+
+    /* InitializeConditions for UnitDelay: '<S7>/Output' */
+    sensorTask_DW.Output_DSTATE = sensorTask_P.Output_InitialCondition;
 
     /* End of SystemInitialize for SubSystem: '<Root>/readSensors' */
   }

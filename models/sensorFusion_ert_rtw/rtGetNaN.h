@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: rtGetNaN.h
  *
- * Code generated for Simulink model 'sensorTask'.
+ * Code generated for Simulink model 'sensorFusion'.
  *
- * Model version                  : 1.138
+ * Model version                  : 1.37
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
+ * C/C++ source code generated on : Sun Jan 22 20:44:38 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -17,10 +17,16 @@
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_rtmodel_h_
-#define RTW_HEADER_rtmodel_h_
-#include "sensorTask.h"
-#endif                                 /* RTW_HEADER_rtmodel_h_ */
+#ifndef RTW_HEADER_rtGetNaN_h_
+#define RTW_HEADER_rtGetNaN_h_
+#include <stddef.h>
+#include "rtwtypes.h"
+#include "rt_nonfinite.h"
+
+extern real_T rtGetNaN(void);
+extern real32_T rtGetNaNF(void);
+
+#endif                                 /* RTW_HEADER_rtGetNaN_h_ */
 
 /*
  * File trailer for generated code.

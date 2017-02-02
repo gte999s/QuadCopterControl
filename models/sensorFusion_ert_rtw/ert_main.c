@@ -5,11 +5,11 @@
  *
  * File: ert_main.c
  *
- * Code generated for Simulink model 'sensorTask'.
+ * Code generated for Simulink model 'sensorFusion'.
  *
- * Model version                  : 1.138
+ * Model version                  : 1.37
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sun Jan 22 20:23:09 2017
+ * C/C++ source code generated on : Sun Jan 22 20:44:38 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,10 +19,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "sensorTask.h"
-#include "sensorTask_private.h"
+#include "sensorFusion.h"
+#include "sensorFusion_private.h"
 #include "rtwtypes.h"
 #include "limits.h"
+#include "rt_nonfinite.h"
 #include "linuxinitialize.h"
 #define UNUSED(x)                      x = x
 
@@ -40,21 +41,21 @@ unsigned long threadJoinStatus[8];
 int terminatingmodel = 0;
 void *baseRateTask(void *arg)
 {
-  runModel = (rtmGetErrorStatus(sensorTask_M) == (NULL)) && !rtmGetStopRequested
-    (sensorTask_M);
+  runModel = (rtmGetErrorStatus(sensorFusion_M) == (NULL)) &&
+    !rtmGetStopRequested(sensorFusion_M);
   while (runModel) {
     sem_wait(&baserateTaskSem);
 
     /* External mode */
     {
       boolean_T rtmStopReq = false;
-      rtExtModePauseIfNeeded(sensorTask_M->extModeInfo, 1, &rtmStopReq);
+      rtExtModePauseIfNeeded(sensorFusion_M->extModeInfo, 1, &rtmStopReq);
       if (rtmStopReq) {
-        rtmSetStopRequested(sensorTask_M, true);
+        rtmSetStopRequested(sensorFusion_M, true);
       }
 
-      if (rtmGetStopRequested(sensorTask_M) == true) {
-        rtmSetErrorStatus(sensorTask_M, "Simulation finished");
+      if (rtmGetStopRequested(sensorFusion_M) == true) {
+        rtmSetErrorStatus(sensorFusion_M, "Simulation finished");
         break;
       }
     }
@@ -62,18 +63,18 @@ void *baseRateTask(void *arg)
     /* External mode */
     {
       boolean_T rtmStopReq = false;
-      rtExtModeOneStep(sensorTask_M->extModeInfo, 1, &rtmStopReq);
+      rtExtModeOneStep(sensorFusion_M->extModeInfo, 1, &rtmStopReq);
       if (rtmStopReq) {
-        rtmSetStopRequested(sensorTask_M, true);
+        rtmSetStopRequested(sensorFusion_M, true);
       }
     }
 
-    sensorTask_step();
+    sensorFusion_step();
 
     /* Get model outputs here */
     rtExtModeCheckEndTrigger();
-    runModel = (rtmGetErrorStatus(sensorTask_M) == (NULL)) &&
-      !rtmGetStopRequested(sensorTask_M);
+    runModel = (rtmGetErrorStatus(sensorFusion_M) == (NULL)) &&
+      !rtmGetStopRequested(sensorFusion_M);
   }
 
   runModel = 0;
@@ -85,7 +86,7 @@ void *baseRateTask(void *arg)
 void exitFcn(int sig)
 {
   UNUSED(sig);
-  rtmSetErrorStatus(sensorTask_M, "stopping the model");
+  rtmSetErrorStatus(sensorFusion_M, "stopping the model");
 }
 
 void *terminateTask(void *arg)
@@ -104,7 +105,7 @@ void *terminateTask(void *arg)
   /* Disable rt_OneStep() here */
 
   /* Terminate model */
-  sensorTask_terminate();
+  sensorFusion_terminate();
   sem_post(&stopSem);
   return NULL;
 }
@@ -115,21 +116,21 @@ int main(int argc, char **argv)
   UNUSED(argv);
   printf("**starting the model**\n");
   fflush(stdout);
-  rtmSetErrorStatus(sensorTask_M, 0);
+  rtmSetErrorStatus(sensorFusion_M, 0);
   rtExtModeParseArgs(argc, (const char_T **)argv, NULL);
 
   /* Initialize model */
-  sensorTask_initialize();
+  sensorFusion_initialize();
 
   /* External mode */
-  rtSetTFinalForExtMode(&rtmGetTFinal(sensorTask_M));
+  rtSetTFinalForExtMode(&rtmGetTFinal(sensorFusion_M));
   rtExtModeCheckInit(1);
 
   {
     boolean_T rtmStopReq = false;
-    rtExtModeWaitForStartPkt(sensorTask_M->extModeInfo, 1, &rtmStopReq);
+    rtExtModeWaitForStartPkt(sensorFusion_M->extModeInfo, 1, &rtmStopReq);
     if (rtmStopReq) {
-      rtmSetStopRequested(sensorTask_M, true);
+      rtmSetStopRequested(sensorFusion_M, true);
     }
   }
 
