@@ -29,7 +29,7 @@ for index=10:1:(imu.accel.length-1)
             -x(1:3)'];
     Q=blkdiag((Ts/2)^2*QqChi*diag(gVar)*(QqChi'));
     
-    [x,P]=sensorFusionEKF(Ts,w,a,m,x,P,Q,R,aMean./norm(aMean),mMean);
+    [x,P]=sensorFusionEKFAnalysis(Ts,w,a,m,x,P,Q,R,aMean./norm(aMean),mMean);
     
     qs(count,:)=x(1:4);
     qtemp=qint(qtemp,w*4,Ts);
